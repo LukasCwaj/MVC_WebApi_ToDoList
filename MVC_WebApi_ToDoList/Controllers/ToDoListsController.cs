@@ -20,7 +20,7 @@ namespace MVC_WebApi_ToDoList.Controllers
         {
             _context = context;
         }
-        /*
+
         // GET: api/ToDoLists
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ToDoList>>> GetToDoList()
@@ -28,8 +28,7 @@ namespace MVC_WebApi_ToDoList.Controllers
             return await _context.ToDoList.ToListAsync();
         }
 
-        // GET: api/ToDoLists/5
-        // bylo szukanie po "id" jako int id
+        // GET: api/ToDoLists/true
         [HttpGet("{IsCompleted}")]
         public async Task<ActionResult<ToDoList>> GetToDoList(bool isCompleted)
         {
@@ -42,10 +41,8 @@ namespace MVC_WebApi_ToDoList.Controllers
 
             return toDoList;
         }
-        */
+
         // PUT: api/ToDoLists/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutToDoList(int id, ToDoList toDoList)
         {
@@ -76,15 +73,13 @@ namespace MVC_WebApi_ToDoList.Controllers
         }
 
         // POST: api/ToDoLists
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<ToDoList>> PostToDoList(ToDoList toDoList)
         {
             _context.ToDoList.Add(toDoList);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetToDoListAsync), new { id = toDoList.Id }, toDoList);
+            return CreatedAtAction(nameof(GetToDoList), new { id = toDoList.Id }, toDoList);
         }
 
         // DELETE: api/ToDoLists/5
@@ -106,18 +101,6 @@ namespace MVC_WebApi_ToDoList.Controllers
         private bool ToDoListExists(int id)
         {
             return _context.ToDoList.Any(e => e.Id == id);
-        }
-
-        [HttpGet]
-        public async Task<ToDoList> GetToDoListAsync()
-        {
-            ToDoList todd = new ToDoList();
-            todd.Id = 1;
-            todd.Title = "dsadas";
-            todd.Description = "dsaa";
-            todd.IsCompleted = true;
-            await PostToDoList(todd);
-            return todd;
         }
     }
 }

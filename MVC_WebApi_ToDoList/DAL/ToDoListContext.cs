@@ -9,11 +9,6 @@ namespace MVC_WebApi_ToDoList.DAL
 {
     public class ToDoListContext : DbContext
     {
-        /*public ToDoListContext (DbContextOptions<ToDoListContext> options): base(options)
-        {
-
-        }*/
-
         public ToDoListContext()
         {
             this.Database.EnsureCreated();
